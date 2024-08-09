@@ -22,4 +22,6 @@ urlpatterns = [
     path('', fourStars_views.home, name='home'),
 
     path('about/', fourStars_views.about, name='about'),
+    path('professors/', fourStars_views.professor_list, name='professor_list'),
+    
 ]

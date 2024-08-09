@@ -30,11 +30,12 @@ class Professor(models.Model):
         return self.first_name + ' ' + self.last_name 
     
     @property
-    def average_rating(self):
+    def average_ratings(self):
         ratings = self.ratings.all()
         if ratings.exists():
             return ratings.aggregate(models.Avg('rating'))['rating__avg']
         return None
+    
     
     
  

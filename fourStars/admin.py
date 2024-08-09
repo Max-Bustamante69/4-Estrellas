@@ -18,14 +18,11 @@ class CourseAdmin(admin.ModelAdmin):
 
 @admin.register(Professor)
 class ProfessorAdmin(admin.ModelAdmin):
-    list_display = ['first_name', 'last_name', 'email', 'average_rating_display']
+    list_display = ['first_name', 'last_name', 'email', 'average_ratings']
     search_fields = ['first_name', 'last_name', 'email']
     ordering = ['first_name']
     
-    def average_rating_display(self, obj):
-        # Returns the average rating formatted as a float
-        return obj.average_rating or 'No ratings'
-    average_rating_display.short_description = 'Average Rating'
+
 
 @admin.register(Rating)
 class RatingAdmin(admin.ModelAdmin):

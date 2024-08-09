@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professor List</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'fourStars/styles.css' %}">
+    <script src="{% static 'fourStars/scripts.js' %}" defer></script>
+</head>
+<body>
+    <h1>Professor List</h1>
+
+    <form method="get" class="search-form">
+        <input type="text" name="q" placeholder="Search professors or courses" value="{{ search_query }}">
+        <select name="order_by">
+            <option value="first_name" {% if order_by == 'first_name' %}selected{% endif %}>First Name</option>
+            <option value="last_name" {% if order_by == 'last_name' %}selected{% endif %}>Last Name</option>
+            <option value="average_rating" {% if order_by == 'average_rating' %}selected{% endif %}>Average Rating</option>
+        </select>
+        <button type="submit">Sort</button>
+        <button type="button" id="toggleSortDirection">Toggle Sort Direction</button>
+    </form>
+
+    <div class="professor-cards">
+        {% for professor in professors %}
+        <div class="professor-card">
+            <div class="professor-name">{{ professor.first_name }} {{ professor.last_name }}</div>
+            <div class="professor-courses">
+                <strong>Courses:</strong>
+                {% for course in professor.courses.all %}
+                    {{ course.name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </div>
+            <div class="professor-rating">
+                {{ professor.average_rating|default:"N/A" }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
